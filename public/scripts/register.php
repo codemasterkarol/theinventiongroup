@@ -24,7 +24,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @return mixed numeric value
      */
     function filterNumericInput($input){
-        return preg_replace('\D', '', $input);
+        return preg_replace('/\D/', '', $input);
     }
 
     /**
