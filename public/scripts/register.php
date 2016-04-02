@@ -84,21 +84,21 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @return bool
      */
     function createNewUser($db, $newUser){
-        $columns = implode(", ", array_keys($newUser));
-        $values = array_values($newUser);
         /**
          * Creates a query for inserting the new user into the database
          */
         $query = "INSERT INTO users (
             'name', 'email', 'address', 'city', 'state', 'zip', 'dayphone', 'evephone', 'password'
-        ) VALUES ( $columns )";
+        ) VALUES (
+            ':name', ':email', ':address', ':city', ':state', 'zip', ':dayphone', ':evephone', ':password'
+        )";
 
         /**
          * executes the query and returns an exception if it fails for some unknown god forsaken reason
          */
         try {
             $stmt = $db->prepare($query);
-            $stmt->execute($values);
+            $stmt->execute($newUser);
 
             return true;
         } catch(PDOException $exception){
