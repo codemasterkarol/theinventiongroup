@@ -1,5 +1,7 @@
 <?php
-
+if(!$_SESSION['loggedin']) {
+    session_unset();
+}
 require_once("../../scripts/common.php");
 
 /**

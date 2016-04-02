@@ -31,6 +31,3 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,  PDO::FETCH_ASSOC);
 
 // tells the browser I am using UTF-8!
 header('Content-Type: text/html; charset=utf-8');
-
-// init session
-session_start();
