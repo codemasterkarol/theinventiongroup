@@ -105,7 +105,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             error_log($exception->getMessage());
             $errors = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors']['general'] = $errors;
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line108'); exit;
+            $_SESSION['hi'] = "HI!";
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
     }
 
