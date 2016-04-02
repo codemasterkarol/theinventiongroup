@@ -29,5 +29,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // tells PDO to return db rows using assoc array as default
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,  PDO::FETCH_ASSOC);
 
+session_save_path($_SERVER['DOCUMENT_ROOT'] . '/cgi-bin/tmp');
 // tells the browser I am using UTF-8!
 header('Content-Type: text/html; charset=utf-8');
