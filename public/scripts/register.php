@@ -261,15 +261,15 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } else {
             $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors'] = $errors;
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/line265'); exit;
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
 
     } else {
         $_SESSION['registration_errors'] = $errors;
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line270'); exit;
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
     }
 
 
 }  else {
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line275'); exit;
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
 }

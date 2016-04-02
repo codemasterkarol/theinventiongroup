@@ -2,6 +2,7 @@
 
 <div class="small-12 columns">
     <h2>Register</h2>
+    <?php if (isset($_SESSION['registration_errors']['userexists'])) { echo '<p class="error">' . $_SESSION['registration_errors']['userexists'] . '</p>';}; ?>
     <form id="register" method="post" action="scripts/register.php">
         <p><input type="text" required name="name" placeholder="Nikola Tesla"><label for="name">Name</label></p>
         <?php if($_SESSION['registration_errors']['name']) { echo '<p class="error">' . $_SESSION['registration_errors']['name'] . '</p>';} ?>

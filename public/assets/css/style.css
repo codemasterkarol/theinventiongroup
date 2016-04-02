@@ -31,6 +31,20 @@ h2 {
 h3:not(:first-of-type) {
     margin-top: 3rem;
 }
+
+.error {
+    background: #760015;
+    border: 1px solid #222;
+    color: #fff;
+    padding: 1rem;
+}
+.error a {
+    color: #ff8c87;
+}
+.error a:hover {
+    color: #fff;
+}
+
 ul:not(.menu) {
     margin-left: 2rem;
     list-style: none;
