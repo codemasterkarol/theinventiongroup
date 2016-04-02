@@ -2,6 +2,9 @@
 
 require_once("../../scripts/common.php");
 
+// Start a session if one doesn't already exist
+if(!session_id()){session_start();}
+
 /**
  * Checks to ensure it's a legitimate post request
  * Moves on to process it, or else redirects back to the registration page.
@@ -264,8 +267,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     } else {
         header('Location: http://invention.karolbrennan.com/register');
     }
-
-
 
 
 }  else {

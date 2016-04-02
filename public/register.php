@@ -3,6 +3,11 @@
 <div class="small-12 columns">
     <h2>Register</h2>
 
+    <?php
+        var_dump($_SESSION['registration_errors']);
+        var_dump($_SESSION['registration_messages']);
+    ?>
+
     <form id="register" method="post" action="scripts/register.php">
         <p><input type="text" required name="name" placeholder="Nikola Tesla"><label for="name">Name</label></p>
         <p><input type="email" required name="email" placeholder="genius@edisonsucks.com"><label for="email">Email (will double as your username)</label></p>
