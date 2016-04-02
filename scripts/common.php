@@ -14,8 +14,8 @@ require_once('credentials.php');
 // $password = '';
 // $dbname = '';
 // $host = 'localhost';
-$dsn = 'mysql:dbname='.$dbname.';host=' . $host;
-//charset=utf8
+$dsn = 'mysql:dbname='.$dbname.';host=' . $host.';charset=utf8';
+
 // let's try connecting to the database.
 try {
     $db = new PDO($dsn, $username, $password);

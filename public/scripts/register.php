@@ -1,6 +1,6 @@
 <?php
 
-require("../../scripts/common.php");
+require_once("../../scripts/common.php");
 
 /**
  * Checks to ensure it's a legitimate post request
