@@ -70,7 +70,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
             $_SESSION['registration_errors']['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            header('Location: /register');
+            header('Location: /register'); exit();
         }
     }
 
@@ -101,7 +101,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception){
             error_log($exception->getMessage());
             $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
-            header('Location: /register');
+            header('Location: /register'); exit();
         }
     }
 
@@ -122,7 +122,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             if (doesUserExist($db, $email)) {
                 $_SESSION['registration_errors']['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
-                header('Location: /register');
+                header('Location: /register'); exit();
             }
         } else {
             $_SESSION['registration_errors']['email'] = "Please enter a valid email address.";             
@@ -254,17 +254,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
             $_SESSION['registration_messages']['register'] = "You have successfully registered and have automatically been logged in.";
-            header('Location: /');
+            header('Location: /'); exit();
         } else {
             $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
-            header('Location: /register');
+            header('Location: /register'); exit();
         }
 
     } else {
-        header('Location:/register');
+        header('Location:/register'); exit();
     }
 
 
 }  else {
-    header('Location:/register');
+    header('Location:/register'); exit();
 }
