@@ -1,0 +1,5 @@
+/scripts/credentials.php
+/Vagrantfile
+/ansible
+/.vagrant
+.idea
