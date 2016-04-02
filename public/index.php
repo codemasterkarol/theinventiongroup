@@ -1,8 +1,4 @@
-<?php require("../includes/header.php");
-
-
-    var_dump($_SESSION);
-?>
+<?php require("../includes/header.php");?>
 
 <div class="small-12 columns">
     <div class="calltoaction">

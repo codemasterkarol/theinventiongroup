@@ -1,10 +1,7 @@
-<?php include("../includes/header.php"); ?>
+<?php require("../includes/header.php"); ?>
 
 <div class="small-12 columns">
     <h2>Register</h2>
-    <?php
-        var_dump($_SESSION);
-    ?>
     <form id="register" method="post" action="scripts/register.php">
         <p><input type="text" required name="name" placeholder="Nikola Tesla"><label for="name">Name</label></p>
         <?php if($_SESSION['registration_errors']['name']) { echo '<p class="error">' . $_SESSION['registration_errors']['name'] . '</p>';} ?>
@@ -32,4 +29,4 @@
     </form>
 </div>
 
-<?php include("../includes/footer.php"); ?>
+<?php require("../includes/footer.php"); ?>

@@ -1,4 +1,4 @@
-<?php include("../includes/header.php"); ?>
+<?php require("../includes/header.php"); ?>
 
 <div class="small-12 columns">
     <h2>Login</h2>
@@ -10,4 +10,4 @@
     </form>
 </div>
 
-<?php include("../includes/footer.php"); ?>
+<?php require("../includes/footer.php"); ?>

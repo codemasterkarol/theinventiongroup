@@ -20,8 +20,9 @@ $dsn = 'mysql:dbname='.$dbname.';host=' . $host.';charset=utf8';
 try {
     $db = new PDO($dsn, $username, $password);
 } catch (PDOException $exception) {
-    die($exception->getMessage());
-    // die("Sorry, we could not complete your request at this time.")
+    error_log($exception->getMessage());
+    $_SESSION['general_error'] = "Sorry, we could not complete your request at this time.";
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
 }
 // tells PDO to throw exceptions all over the place
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

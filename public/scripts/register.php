@@ -87,7 +87,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         /**
          * Creates a query for inserting the new user into the database
          */
-        // var_dump($newUser); die;
 
         $query = "INSERT INTO users (
             `name`, `email`, `address`, `city`, `state`, `zip`, `dayphone`, `evephone`, `password`
@@ -104,7 +103,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
             return true;
         } catch(PDOException $exception){
-            die($exception->getMessage());
+            error_log($exception->getMessage());
             $errors = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors']['general'] = $errors;
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;

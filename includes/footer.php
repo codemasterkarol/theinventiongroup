@@ -7,7 +7,7 @@
             <a href="/"><img src="/assets/img/newlogo.svg" alt="The Invention Group"></a>
         </div>
         <div class="small-12 medium-8 columns">
-            <?php include("nav.php"); ?>
+            <?php require("nav.php"); ?>
         </div>
     </div>
     <div class="row">

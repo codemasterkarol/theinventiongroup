@@ -1,4 +1,4 @@
-<?php include("../includes/header.php"); ?>
+<?php require("../includes/header.php"); ?>
 
 <div class="small-12 columns">
     <h2>About Us</h2>
@@ -22,4 +22,4 @@
     </h3>
 </div>
 
-<?php include("../includes/footer.php"); ?>
+<?php require("../includes/footer.php"); ?>
