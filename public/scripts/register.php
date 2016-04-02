@@ -236,7 +236,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the registration form
      * If none are found, it will process the registration.
      */
-    if(empty($errors)) {
+    if(empty($errors['registration_errors'])) {
 
         /**
          * Creates a new user array using the input submitted
