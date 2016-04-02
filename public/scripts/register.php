@@ -128,9 +128,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         }
     }
 
-    $_SESSION['message'] = "You are at line 132.";
-    die($_SESSION['message']);
-
     /**
      * Filters the name post item
      */
@@ -139,6 +136,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     } else {
         $name = filterTextInput($_POST['name']);
     }
+
+    $_SESSION['message'] = "You are at line 139.";
+    die($_SESSION['message']);
 
     /**
      * Filters the password post item
