@@ -74,7 +74,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             error_log($exception->getMessage());
             $errors['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
             session_write_close();
-            header('Location: /register'); exit;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
     }
 
@@ -107,7 +107,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $errors = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors']['general'] = $errors;
             session_write_close();
-            header('Location: /register'); exit;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
     }
 
@@ -129,7 +129,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 Try <a href='/login'>Logging in?</a>";
                 $_SESSION['registration_errors'] = $errors;
                 session_write_close();
-                header('Location: /register'); exit;
+                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
             }
         } else {
             $errors['email'] = "Please enter a valid email address.";
@@ -267,17 +267,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors'] = $errors;
             session_write_close();
-            header('Location: /register'); exit;
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
 
     } else {
         $_SESSION['registration_errors'] = $errors;
         session_write_close();
-        header('Location:/register'); exit;
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
     }
 
 
 }  else {
     session_write_close();
-    header('Location:/register'); exit;
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
 }
