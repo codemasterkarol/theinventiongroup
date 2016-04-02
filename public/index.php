@@ -1,4 +1,8 @@
-<?php include("../includes/header.php");?>
+<?php require("../includes/header.php");
+
+
+    var_dump($_SESSION);
+?>
 
 <div class="small-12 columns">
     <div class="calltoaction">
@@ -41,4 +45,4 @@
 </div>
 
 <div class="row">
-<?php include("../includes/footer.php"); ?>
+<?php require("../includes/footer.php"); ?>

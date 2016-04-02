@@ -2,11 +2,9 @@
 
 <div class="small-12 columns">
     <h2>Register</h2>
-
     <?php
         var_dump($_SESSION);
     ?>
-
     <form id="register" method="post" action="scripts/register.php">
         <p><input type="text" required name="name" placeholder="Nikola Tesla"><label for="name">Name</label></p>
         <?php if($_SESSION['registration_errors']['name']) { echo '<p class="error">' . $_SESSION['registration_errors']['name'] . '</p>';} ?>
@@ -30,7 +28,6 @@
             <div><input type="tel" required name="evephone" placeholder="(555)555-5555"><label for="evephone">Evening Phone</label></div>
             <?php if($_SESSION['registration_errors']['evephone']) { echo '<p class="error">' . $_SESSION['registration_errors']['evephone'] . '</p>';} ?>
         </div>
-        <?php session_unset(); ?>
         <p><button>Register</button></p>
     </form>
 </div>

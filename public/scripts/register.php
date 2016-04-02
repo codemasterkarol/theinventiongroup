@@ -44,7 +44,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @param $password
      * @return bool|string
      */
-    function hashPassword($password){
+    function hashPassword($password) {
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
@@ -73,7 +73,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
             $errors['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line76'); exit;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
         }
     }
 
@@ -87,10 +87,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         /**
          * Creates a query for inserting the new user into the database
          */
+        // var_dump($newUser); die;
+
         $query = "INSERT INTO users (
-            'name', 'email', 'address', 'city', 'state', 'zip', 'dayphone', 'evephone', 'password'
+            `name`, `email`, `address`, `city`, `state`, `zip`, `dayphone`, `evephone`, `password`
         ) VALUES (
-            ':name', ':email', ':address', ':city', ':state', 'zip', ':dayphone', ':evephone', ':password'
+            :name, :email, :address, :city, :state, :zip, :dayphone, :evephone, :password
         )";
 
         /**
@@ -126,7 +128,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 $errors['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
                 $_SESSION['registration_errors'] = $errors;
-                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line129'); exit;
+                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
             }
         } else {
             $errors['email'] = "Please enter a valid email address.";
@@ -178,7 +180,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     // List of state abbreviations
     $us_state_abbrevs = array('AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'AE', 'AA', 'AP');
-
 
     /**
      * Filters the state post item
@@ -243,21 +244,20 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
          * this will then be passed onto the database to create a new user record
          */
         $newUser = [
-            ':name'      => $name,
-            ':email'     => $email,
-            ':address'   => $address,
-            ':city'      => $city,
-            ':state'     => $state,
-            ':zip'       => $zip,
-            ':dayphone'  => $dayphone,
-            ':evephone'  => $evephone,
-            ':password'  => $password
+            'name'      => $name,
+            'email'     => $email,
+            'address'   => $address,
+            'city'      => $city,
+            'state'     => $state,
+            'zip'       => $zip,
+            'dayphone'  => $dayphone,
+            'evephone'  => $evephone,
+            'password'  => $password
         ];
 
         if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
-            $errors['register'] = "You have successfully registered and have automatically been logged in.";
-            $_SESSION['registration_errors'] = $errors;
+            $_SESSION['register'] = "You have successfully registered and have automatically been logged in.";
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
         } else {
             $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";
