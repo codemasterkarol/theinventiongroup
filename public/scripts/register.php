@@ -128,8 +128,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         }
     }
 
-
-    die("you are at line 132");
+    $_SESSION['message'] = "You are at line 132.";
+    die($_SESSION['message']);
 
     /**
      * Filters the name post item
