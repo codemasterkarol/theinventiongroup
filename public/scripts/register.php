@@ -141,7 +141,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
     $_SESSION['message'] = "You are at line 139.";
-    die($_SESSION['message']);
+   // die($_SESSION['message']);
 
     /**
      * Filters the password post item
