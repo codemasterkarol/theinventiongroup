@@ -4,8 +4,6 @@ require_once("../../scripts/common.php");
 
 // Start a session if one doesn't already exist
 if(!session_id()){session_start();}
-$_SESSION['registration_errors'] = "I'm on line 7";
-die($_SESSION['registration_errors']);
 
 /**
  * Checks to ensure it's a legitimate post request
