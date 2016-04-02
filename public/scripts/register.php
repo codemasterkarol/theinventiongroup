@@ -52,7 +52,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @param $email
      * @return bool
      */
-    function doesUserExist($email) {
+    function doesUserExist($db, $email) {
         // prepared statement for running the query
         $query = "SELECT 1 FROM users WHERE email = :email";
         // parameters to pass onto the prepared statement
@@ -81,7 +81,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @param $newUser array of filtered data
      * @return bool
      */
-    function createNewUser($newUser){
+    function createNewUser($db, $newUser){
         /**
          * Creates a query for inserting the new user into the database
          */
@@ -120,7 +120,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     } else {
         $email = filterEmailInput($_POST['email']);
         if($email){
-            if (doesUserExist($email)) {
+            if (doesUserExist($db, $email)) {
                 $_SESSION['registration_errors']['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
                 header('Location:' .$_SERVER['DOCUMENT_ROOT'] . '/register');
@@ -252,7 +252,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             ':password'  => $password
         ];
 
-        if(createNewUser($newUser)){
+        if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
             $_SESSION['registration_messages']['register'] = "You have successfully registered and have automatically been logged in.";
             header('Location:' . $_SERVER['DOCUMENT_ROOT'] );
