@@ -85,6 +85,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      */
     function createNewUser($db, $newUser){
         $columns = implode(", ", array_keys($newUser));
+        $values = array_values($newUser);
         /**
          * Creates a query for inserting the new user into the database
          */
@@ -97,7 +98,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
          */
         try {
             $stmt = $db->prepare($query);
-            $stmt->execute($newUser);
+            $stmt->execute($values);
 
             return true;
         } catch(PDOException $exception){
