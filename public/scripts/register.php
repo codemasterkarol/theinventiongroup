@@ -98,7 +98,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
          */
         try {
             $stmt = $db->prepare($query);
-            die($stmt);
             $stmt->execute($newUser);
 
             return true;
