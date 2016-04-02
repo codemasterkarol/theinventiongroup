@@ -1,2 +1,0 @@
-# theinventiongroup
-Capstone project 
