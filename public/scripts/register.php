@@ -109,6 +109,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     // Here is where we start processing stuff.
 
+    die("you are at line 112");
 
     /**
      * Filters the email address and ensures it doesn't exist already in the DB
