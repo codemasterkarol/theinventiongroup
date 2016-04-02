@@ -1,6 +1,5 @@
 <?php
-    session_save_path('/home/karolbrennan/public_html/invention/cgi-bin/tmp');
-    if(!session_id()) {session_start();}
+    session_start();
 ?>
 <!DOCTYPE html>
 <html>
