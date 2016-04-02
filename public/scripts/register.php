@@ -8,6 +8,9 @@ require_once("../../scripts/common.php");
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // this is a legit post and you should go ahead and process this stuff below yo
 
+    // This will be an array that stores our errors for the session
+    $errors = [];
+
     /**
      * Filters and trims input then returns sanitized value
      * @param $input string data from form
@@ -69,7 +72,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
-            $_SESSION['registration_errors']['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            $errors['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
             header('Location: /register'); exit();
         }
     }
@@ -100,7 +103,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             return true;
         } catch(PDOException $exception){
             error_log($exception->getMessage());
-            $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
+            $errors = "Sorry, there was an error completing your registration. Please try again later.";
             header('Location: /register'); exit();
         }
     }
@@ -114,17 +117,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If it does, it will throw an error and return the user to the form
      */
     if(empty($_POST['email'])){
-        $_SESSION['registration_errors']['email'] = "Please enter your email address.";
+        $errors['email'] = "Please enter your email address.";
     } else {
         $email = filterEmailInput($_POST['email']);
         if($email){
             if (doesUserExist($db, $email)) {
-                $_SESSION['registration_errors']['userexists'] = "A user already exists with that email address.
+                $errors['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
                 header('Location: /register'); exit();
             }
         } else {
-            $_SESSION['registration_errors']['email'] = "Please enter a valid email address.";             
+            $errors['email'] = "Please enter a valid email address.";
         }
     }
 
@@ -132,7 +135,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the name post item
      */
     if(empty($_POST['name'])){
-        $_SESSION['registration_errors']['name'] = "Please enter your name.";
+        $errors['name'] = "Please enter your name.";
     } else {
         $name = filterTextInput($_POST['name']);
     }
@@ -144,14 +147,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the password post item
      */
     if(empty($_POST['password'])){
-        $_SESSION['registration_errors']['password'] = "Please enter a password.";
+        $errors['password'] = "Please enter a password.";
     } else {
         if(strlen($_POST['password'] < 8)) {
-            $_SESSION['registration_errors']['password'] = "Your password must be at least 8 characters.";
+            $errors['password'] = "Your password must be at least 8 characters.";
         } else {
             $password = hashPassword($_POST['password']);
             if ($password === false) {
-                $_SESSION['registration_errors']['password'] = "There was a problem with the password you chose. Please try again.";
+                $errors['password'] = "There was a problem with the password you chose. Please try again.";
             }
         }
     }
@@ -160,7 +163,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the address post item
      */
     if(empty($_POST['address'])){
-        $_SESSION['registration_errors']['address'] = "Please enter your street address.";
+        $errors['address'] = "Please enter your street address.";
     } else {
         $address = filterTextInput($_POST['address']);
     }
@@ -169,7 +172,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the city post item
      */
     if(empty($_POST['city'])){
-        $_SESSION['registration_errors']['city'] = "Please enter your city.";
+        $errors['city'] = "Please enter your city.";
     } else {
         $city = filterTextInput($_POST['city']);
     }
@@ -182,12 +185,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the state post item
      */
     if(empty($_POST['state'])){
-        $_SESSION['registration_errors']['state'] = "Please enter your state.";
+        $errors['state'] = "Please enter your state.";
     } else {
         if(in_array($_POST['state'], $us_state_abbrevs)) {
             $state = $_POST['state'];
         } else {
-            $_SESSION['registration_errors']['state'] = "Please enter a valid state abbreviation.";
+            $errors['state'] = "Please enter a valid state abbreviation.";
         }
     }
 
@@ -195,11 +198,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the zip post item
      */
     if(empty($_POST['zip'])){
-        $_SESSION['registration_errors']['zip'] = "Please enter your zip code.";
+        $errors['zip'] = "Please enter your zip code.";
     } else {
         $zip = filterNumericInput($_POST['zip']);
         if(strlen($zip) !== 5) {
-            $_SESSION['registration_errors']['zip'] = "Please enter a valid zip code.";
+            $errors['zip'] = "Please enter a valid zip code.";
         }
     }
 
@@ -208,11 +211,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the dayphone post item
      */
     if(empty($_POST['dayphone'])) {
-        $_SESSION['registration_errors']['dayphone'] = "Please enter your daytime phone number.";
+        $errors['dayphone'] = "Please enter your daytime phone number.";
     } else {
         $dayphone = filterNumericInput($_POST['dayphone']);
         if(strlen($dayphone) !== '10' ||  strlen($dayphone) !== '11') {
-            $_SESSION['registration_errors']['dayphone'] = "Please enter a valid daytime phone number.";
+            $errors['dayphone'] = "Please enter a valid daytime phone number.";
         }
     }
 
@@ -221,11 +224,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the evephone post item
      */
     if(empty($_POST['evephone'])) {
-        $_SESSION['registration_errors']['dayphone'] = "Please enter your evening phone number.";
+        $errors['dayphone'] = "Please enter your evening phone number.";
     } else {
         $evephone = filterNumericInput($_POST['evephone']);
         if(strlen($evephone) !== '10' || strlen($evephone) !==  '11') {
-            $_SESSION['registration_errors']['evephone'] = "Please enter a valid evening phone number.";
+            $errors['evephone'] = "Please enter a valid evening phone number.";
         }
     }
 
@@ -234,7 +237,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the registration form
      * If none are found, it will process the registration.
      */
-    if(empty($_SESSION['registration_errors'])) {
+    if(empty($errors)) {
 
         /**
          * Creates a new user array using the input submitted
@@ -254,14 +257,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
-            $_SESSION['registration_messages']['register'] = "You have successfully registered and have automatically been logged in.";
+            $errors['register'] = "You have successfully registered and have automatically been logged in.";
+            $_SESSION['registration_errors'] = $errors;
             header('Location: /'); exit();
         } else {
-            $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
+            $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";
+            $_SESSION['registration_errors'] = $errors;
             header('Location: /register'); exit();
         }
 
     } else {
+        $_SESSION['registration_errors'] = $errors;
         header('Location:/register'); exit();
     }
 
