@@ -4,8 +4,7 @@
     <h2>Register</h2>
 
     <?php
-        var_dump($_SESSION['registration_errors']);
-        var_dump($_SESSION['registration_messages']);
+        var_dump($_SESSION);
     ?>
 
     <form id="register" method="post" action="scripts/register.php">
