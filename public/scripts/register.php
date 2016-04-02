@@ -71,7 +71,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
             $_SESSION['registration_errors']['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            header('Location:' . $_SERVER['DOCUMENT_ROOT'] . '/register');
+            header('Location: http://invention.karolbrennan.com/register');
         }
     }
 
@@ -102,7 +102,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception){
             error_log($exception->getMessage());
             $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
-            header('Location:' . $_SERVER['DOCUMENT_ROOT'] . '/register');
+            header('Location: http://invention.karolbrennan.com/register');
         }
     }
 
@@ -123,7 +123,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             if (doesUserExist($db, $email)) {
                 $_SESSION['registration_errors']['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
-                header('Location:' .$_SERVER['DOCUMENT_ROOT'] . '/register');
+                header('Location: http://invention.karolbrennan.com/register');
             }
         } else {
             $_SESSION['registration_errors']['email'] = "Please enter a valid email address.";             
@@ -255,19 +255,19 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
             $_SESSION['registration_messages']['register'] = "You have successfully registered and have automatically been logged in.";
-            header('Location:' . $_SERVER['DOCUMENT_ROOT'] );
+            header('Location: http://invention.karolbrennan.com');
         } else {
             $_SESSION['registration_errors'] = "Sorry, there was an error completing your registration. Please try again later.";
-            header('Location:' . $_SERVER['DOCUMENT_ROOT'] . '/register');
+            header('Location: http://invention.karolbrennan.com/register');
         }
 
     } else {
-        header('Location:' . $_SERVER['DOCUMENT_ROOT'] . '/register');
+        header('Location: http://invention.karolbrennan.com/register');
     }
 
 
 
 
 }  else {
-    header('Location:' . $_SERVER['DOCUMENT_ROOT'] . '/register');
+    header('Location: http://invention.karolbrennan.com/register');
 }
