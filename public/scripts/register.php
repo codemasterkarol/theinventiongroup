@@ -73,7 +73,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
             $errors['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line76'); exit;
         }
     }
 
@@ -105,7 +105,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             error_log($exception->getMessage());
             $errors = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors']['general'] = $errors;
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line108'); exit;
         }
     }
 
@@ -126,7 +126,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 $errors['userexists'] = "A user already exists with that email address.
                 Try <a href='/login'>Logging in?</a>";
                 $_SESSION['registration_errors'] = $errors;
-                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line129'); exit;
             }
         } else {
             $errors['email'] = "Please enter a valid email address.";
@@ -262,15 +262,15 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } else {
             $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";
             $_SESSION['registration_errors'] = $errors;
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/line265'); exit;
         }
 
     } else {
         $_SESSION['registration_errors'] = $errors;
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line270'); exit;
     }
 
 
 }  else {
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/line275'); exit;
 }
