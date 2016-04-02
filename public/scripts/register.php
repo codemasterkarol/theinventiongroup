@@ -93,6 +93,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             ':name', ':email', ':address', ':city', ':state', 'zip', ':dayphone', ':evephone', ':password'
         )";
 
+        die($db->prepare($query));
         /**
          * executes the query and returns an exception if it fails for some unknown god forsaken reason
          */
