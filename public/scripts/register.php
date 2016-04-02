@@ -93,12 +93,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             ':name', ':email', ':address', ':city', ':state', 'zip', ':dayphone', ':evephone', ':password'
         )";
 
-        die($query);
         /**
          * executes the query and returns an exception if it fails for some unknown god forsaken reason
          */
         try {
             $stmt = $db->prepare($query);
+            die($stmt);
             $stmt->execute($newUser);
 
             return true;
