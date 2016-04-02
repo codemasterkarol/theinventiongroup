@@ -1,9 +1,4 @@
-<?php
-// Start a session if one doesn't already exist
-if(!session_id()) {
-    session_start();
-}
-?>
+<?php if(!session_id()) {session_start();} ?>
 <!DOCTYPE html>
 <html>
 <head>
