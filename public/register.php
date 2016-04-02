@@ -4,7 +4,6 @@
     <h2>Register</h2>
 
     <?php
-        if(!session_id()){session_start();}
         var_dump($_SESSION['registration_errors']);
         var_dump($_SESSION['registration_messages']);
     ?>

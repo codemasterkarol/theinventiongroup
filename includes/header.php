@@ -11,6 +11,13 @@
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 </head>
 
+<?php
+// Start a session if one doesn't already exist
+if(!session_id()) {
+    session_start();
+}
+?>
+
 <header>
     <div class="row">
         <div class="small-12 columns text-right">
