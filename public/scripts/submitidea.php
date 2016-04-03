@@ -48,30 +48,29 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
 
-    function submitIdea(){
+    function submitIdea($db, $invention){
         /**
          * Creates a query for inserting the new user into the database
          */
 
-        $query = "INSERT INTO submission (
-            `name`, `email`, `address`, `city`, `state`, `zip`, `dayphone`, `evephone`, `password`
+        $query = "INSERT INTO inventions (
+            `userid`, `inv_name`, `description`, `image`
         ) VALUES (
-            :name, :email, :address, :city, :state, :zip, :dayphone, :evephone, :password
+            :userid, :inv_name, :description, :image
         )";
 
         /**
          * executes the query and returns an exception if it fails for some unknown god forsaken reason
          */
         try {
+
             $stmt = $db->prepare($query);
-            $stmt->execute($newUser);
+            $stmt->execute($invention);
 
             return true;
         } catch(PDOException $exception){
             error_log($exception->getMessage());
-            $errors = "Sorry, there was an error completing your registration. Please try again later.";
-            $_SESSION['registration_errors']['general'] = $errors;
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+            return false;
         }
     }
 
@@ -102,17 +101,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         }
     }
 
-    /**
-     * Filters the phone post item
-     */
-    if(empty($_POST['phone'])) {
-        $errors['phone'] = "Please enter your phone number.";
-    } else {
-        $phone = filterNumericInput($_POST['phone']);
-        if(strlen($phone) !== '10' ||  strlen($phone) !== '11') {
-            $errors['phone'] = "Please enter a valid phone number.";
-        }
-    }
 
     /**
      * Filters the invention title post
@@ -120,7 +108,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if (empty($_POST['inv_name'])) {
         $errors['inv_name'] = "Please enter your invention's name.";
     } else {
-        $message = filterTextInput($_POST['inv_name']);
+        $inventionName = filterTextInput($_POST['inv_name']);
     }
 
     /**
@@ -129,7 +117,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if (empty($_POST['description'])) {
         $errors['description'] = "Please enter a description of your invention.";
     } else {
-        $message = filterTextInput($_POST['description']);
+        $description = filterTextInput($_POST['description']);
+    }
+
+
+    /**
+     * Filters the invention post
+     */
+    if (!empty($_POST['image'])) {
+        $image = $_POST['image'];
+    } else {
+        $image = "";
     }
 
 
@@ -141,11 +139,25 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if (!empty($errors)) {
         $_SESSION['submission_errors'] = $errors;
     } else {
+        $userid = intval($_SESSION['id']);
+        // create array with submission values
+        $invention = [
+            'userid'        => $userid,
+            'inv_name'      => $inventionName,
+            'description'   => $description,
+            'image'         => $image
+        ];
 
+        if(submitIdea($db, $invention)){
+            $_SESSION['message'] = "Your submission has been sent! We will get back to you soon!";
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;
+        } else {
+            $errors = "Sorry, there was an error completing your submission. Please try again later.";
+            $_SESSION['submission_errors']['general'] = $errors;
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;
+        }
     }
 
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit');
-    exit;
 
 } else {
     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;

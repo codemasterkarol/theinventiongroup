@@ -256,6 +256,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
 
         if(createNewUser($db, $newUser)){
+            $_SESSION['id'] = $db->lastInsertId();
+            $_SESSION['name'] = $newUser['name'];
+            $_SESSION['email'] = $newUser['email'];
             $_SESSION['loggedin'] = true;
             $_SESSION['message'] = "You have successfully registered and have automatically been logged in.";
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
