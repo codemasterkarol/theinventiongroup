@@ -68,7 +68,7 @@ if(!empty($errors)){
 } else {
     $to = 'codemasterkarol@gmail.com';
     $subject = "Invention Group: New Contact Form Message";
-    $headers = 'From: webmaster@example.com';
+    $headers = 'From: webmaster@example.com' . "\r\n";
     $body = "New contact from: {$name}.\n
             Subject: {$subject}\n
             Message: {$message}";
