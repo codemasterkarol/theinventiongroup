@@ -2,8 +2,17 @@
 <div class="small-12 columns">
 
     <?php
-    if($_SESSION['message']) { ?>
-        <p class="message"> <?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+    if($_SESSION['message'] || isset($_GET['logout'])) { ?>
+        <p class="message">
+            <?php
+            if($_SESSION['message']) {
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+            }
+            if(isset($_GET['logout'])) {
+                echo "You have successfully logged out!";
+            }
+            ?></p>
     <?php } ?>
 
     <div class="calltoaction">

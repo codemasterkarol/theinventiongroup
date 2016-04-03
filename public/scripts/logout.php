@@ -9,6 +9,6 @@
  * destroys the current user's session
  */
 session_start();
-session_unset();
-$_SESSION['message'] = "You have successfully logged out.";
-header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+session_destroy();
+unset($_SESSION['loggedin']);
+header('Location:http://' . $_SERVER['HTTP_HOST'] . '/?logout'); exit;

@@ -8,9 +8,6 @@ require_once("../../scripts/common.php");
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // this is a legit post and you should go ahead and process this stuff below yo
 
-    // This will be an array that stores our errors for the session
-    $errors = [];
-
     /**
      * Filters and trims email input and returns sanitized email
      * @param $input string data from form
@@ -84,11 +81,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If it does, it will throw an error and return the user to the form
      */
     if(empty($_POST['email'])){
-        $errors['email'] = "Please enter your email address.";
+        $_SESSION['login_errors']['email'] = "Please enter your email address.";
     } else {
         $email = filterEmailInput($_POST['email']);
         if(!$email){
-            $errors['email'] = "Please enter a valid email address.";
+            $_SESSION['login_errors']['email'] = "Please enter a valid email address.";
         }
     }
 
@@ -97,7 +94,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the password post item
      */
     if(empty($_POST['password'])){
-        $errors['password'] = "Please enter your password.";
+        $_SESSION['login_errors']['password'] = "Please enter your password.";
     }
 
 
@@ -106,7 +103,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the login form
      * If none are found, it will process the login.
      */
-    if(empty($_SESSION['login_errors'])) {
+    if(empty($_SESSION['errors'])) {
         login($db, $email);
     } else {
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
