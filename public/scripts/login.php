@@ -8,6 +8,9 @@ require_once("../../scripts/common.php");
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // this is a legit post and you should go ahead and process this stuff below yo
 
+    // Array for storing error messages
+    $errors = [];
+
     /**
      * Filters and trims email input and returns sanitized email
      * @param $input string data from form
