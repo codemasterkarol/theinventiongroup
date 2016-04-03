@@ -66,7 +66,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
-            $errors['message'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            die("Sorry, we could not complete your request at this time. Please try again later.");
         }
     }
 
