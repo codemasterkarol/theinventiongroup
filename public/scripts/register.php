@@ -1,5 +1,4 @@
-<?php
-require_once("../../scripts/common.php");
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/../scripts/common.php");
 
 /**
  * Checks to ensure it's a legitimate post request

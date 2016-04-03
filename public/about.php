@@ -1,4 +1,4 @@
-<?php require("../includes/header.php"); ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php"); ?>
 
 <div class="small-12 columns">
     <h2>About Us</h2>
@@ -22,4 +22,4 @@
     </h3>
 </div>
 
-<?php require("../includes/footer.php"); ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php"); ?>

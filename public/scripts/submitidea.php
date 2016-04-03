@@ -1,11 +1,4 @@
-<?php
-require_once("../../scripts/common.php");
-/**
- * Created by PhpStorm.
- * User: karolbrennan
- * Date: 4/2/16
- * Time: 10:16 AM
- */
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/../scripts/common.php");
 
 /**
  * Checks to ensure it's a legitimate post request
@@ -123,6 +116,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     /**
      * Filters the invention post
+     * @todo make this actually do something.... lol
      */
     if (!empty($_POST['image'])) {
         $image = $_POST['image'];
@@ -138,6 +132,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      */
     if (!empty($errors)) {
         $_SESSION['submission_errors'] = $errors;
+        die(header('Location:/submit'));
     } else {
         $userid = intval($_SESSION['id']);
         // create array with submission values

@@ -1,10 +1,4 @@
 <?php session_start();
-/**
- * Created by PhpStorm.
- * User: karolbrennan
- * Date: 4/2/16
- * Time: 10:16 AM
- */
 
 /**
  * Checks to ensure it's a legitimate post request

@@ -1,13 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: karolbrennan
- * Date: 3/31/16
- * Time: 9:26 PM
- */
-
-// pulls in my credentials for connecting to the database
-require_once('credentials.php');
+<?php require_once('credentials.php'); // pulls in my credentials for connecting to the database
 
 // Here is the variables needed for connecting:
 // $username = '';

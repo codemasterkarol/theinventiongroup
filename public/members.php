@@ -1,10 +1,8 @@
-<?php
-
-    require_once('../scripts/common.php');
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/../scripts/common.php");
 
     if($_SESSION['loggedin'] === true) {
-        require("../includes/header.php");
-        require("scripts/members.php");
+        require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php");
+        require("/scripts/members.php");
     ?>
 
         <div class="small-12 columns">
@@ -51,7 +49,7 @@
             ?>
         </div>
 
-    <?php  require ("../includes/footer.php");
+    <?php  require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php");
 
 
     } else {
