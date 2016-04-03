@@ -41,9 +41,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
     /**
-     * Logs the user in after ensuring that the user exists and the password matches
+     * Attempts to log in the user then returns true if successful
+     * false if the login fails or it will log an error
      * @param $db
      * @param $email
+     * @return bool
      */
     function login($db, $email){
         $query = "SELECT * FROM users WHERE `email` = :email";
@@ -60,20 +62,16 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['loggedin'] = true;
                     $_SESSION['message'] = "You have successfully logged in!";
-                    // redirect
-                    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+                    return true;
                 } else {
                     $errors['message'] = "Sorry, we could not find that username/password combination.
                         Please try again.";
-                    $_SESSION['login_errors'] = $errors;
-                    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
+                    return false;
                 }
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
             $errors['message'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            $_SESSION['login_errors'] = $errors;
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
         }
     }
 
@@ -103,13 +101,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
 
-    /**
-     * This checks for login errors
-     * If any are found, it will redirect to the login form
-     * If none are found, it will process the login.
-     */
-    if(empty($errors)) {
-        login($db, $email);
+    // Attempts to log the user in
+    $loginResult = login($db, $email);
+
+    // Redirects based on successful or failed login
+    if($loginResult){
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
     } else {
         $_SESSION['login_errors'] = $errors;
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
