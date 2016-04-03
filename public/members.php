@@ -1,4 +1,5 @@
 <?php
+session_start();
     if(!isset($_SESSION['loggedin'])) {
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
     } else {
