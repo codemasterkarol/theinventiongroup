@@ -59,8 +59,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 if(verifyPassword($_POST['password'],$row['password'])) {
                     return $row;
                 } else {
-                    $errors['message'] = "Sorry, we could not find that username/password combination.
-                        Please try again.";
                     return false;
                 }
             } else {
@@ -103,6 +101,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     // Redirects based on successful or failed login
     if($userDetails === false) {
+        $errors['message'] = "Sorry, we could not find that username/password combination. Please try again.";
         $_SESSION['login_errors'] = $errors;
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login');
         exit;
