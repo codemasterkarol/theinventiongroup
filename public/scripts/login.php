@@ -56,18 +56,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $row = $stmt->fetch();
 
             if($row){
-                if(verifyPassword($_POST['password'],$row['password'])) {
-                    // set logged in bool and message
-                    $_SESSION['id'] = $row['id'];
-                    $_SESSION['name'] = $row['name'];
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['message'] = "You have successfully logged in!";
-                    return true;
-                } else {
-                    $errors['message'] = "Sorry, we could not find that username/password combination.
-                        Please try again.";
-                    return false;
-                }
+                return $row;
+            } else {
+                return false;
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
@@ -102,14 +93,26 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
 
     // Attempts to log the user in
-    $loginResult = login($db, $email);
+    $userDetails = login($db, $email);
 
     // Redirects based on successful or failed login
-    if($loginResult){
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
-    } else {
+    if($userDetails === false) {
         $_SESSION['login_errors'] = $errors;
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login');
+        exit;
+    } else {
+        if(verifyPassword($_POST['password'],$userDetails['password'])) {
+            // set logged in bool and message
+            $_SESSION['id'] = $userDetails['id'];
+            $_SESSION['name'] = $userDetails['name'];
+            $_SESSION['loggedin'] = true;
+            $_SESSION['message'] = "You have successfully logged in!";
+        } else {
+            $errors['message'] = "Sorry, we could not find that username/password combination.
+                        Please try again.";
+        }
+
+        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
     }
 
 
