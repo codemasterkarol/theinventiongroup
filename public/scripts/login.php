@@ -114,5 +114,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
 
 }  else {
+    error_log($exception->getMessage());
     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
 }
