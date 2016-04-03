@@ -76,11 +76,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $_SESSION['contact_errors'] = $errors;
     } else {
         $to = 'codemasterkarol@gmail.com';
-        $subject = "Invention Group: New Contact Form Message";
+        $subject = "Invention Group: New Message";
         $headers = "From: {$name} <{$email}>";
         $body  = "New contact from: {$name}\n";
-        $body .= "Subject: {$subject}\n";
-        $body .= "Message: {$message}";
+        $body .= "Reply to: {$email}\n";
+        $body .= $message;
 
         mail($to, $subject, $body, $headers);
         http_response_code(200);
