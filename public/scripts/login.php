@@ -111,7 +111,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $errors['message'] = "Sorry, we could not find that username/password combination.
                         Please try again.";
         }
-
+        $_SESSION['login_errors'] = $errors;
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
     }
 
