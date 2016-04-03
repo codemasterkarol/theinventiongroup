@@ -11,4 +11,4 @@
 session_start();
 session_destroy();
 unset($_SESSION['loggedin']);
-header('Location:http://' . $_SERVER['HTTP_HOST'] . '/?logout'); exit;
+die(header('Location:/?logout'));

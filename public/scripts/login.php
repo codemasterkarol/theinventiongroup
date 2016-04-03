@@ -103,8 +103,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if($userDetails === false) {
         $errors['message'] = "Sorry, we could not find that username/password combination. Please try again.";
         $_SESSION['login_errors'] = $errors;
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login');
-        exit;
+        die(header('Location:/login'));
     } else {
         // set logged in bool and message
         $_SESSION['id'] = $userDetails['id'];
@@ -112,11 +111,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $_SESSION['email'] = $userDetails['email'];
         $_SESSION['loggedin'] = true;
         $_SESSION['message'] = "You have successfully logged in!";
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+        die(header('Location:/members'));
     }
 
 
 }  else {
     error_log($exception->getMessage());
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
+    die(header('Location:/login'));
 }

@@ -24,6 +24,7 @@
             <input type="file" class="custom-file-input" name="image" accept="image/*"><label for="image">Image</label>
             <?php if(!empty($_SESSION['submission_errors']['image'])) { echo '<p class="error">' . $_SESSION['submission_errors']['image'] . '</p>'; unset($_SESSION['submission_errors']['image']);} ?>
             <h4>Billing Information</h4>
+            o
             <input type="text" name="cc" placeholder="9999-9999-9999-9999"><label for="cc">Credit Card Number *</label>
             <input type="text" name="exp" placeholder="12/99"><label for="exp">Exp (MM/YY) *</label>
             <button>Submit</button>

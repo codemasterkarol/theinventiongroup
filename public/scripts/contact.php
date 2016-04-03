@@ -87,9 +87,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $_SESSION['message'] = "Your message has been sent successfully!";
     }
 
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact');
-    exit;
+    die(header('Location:/contact'));
 
 } else {
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact'); exit;
+    die(header('Location:/contact'));
 }

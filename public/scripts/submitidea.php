@@ -150,15 +150,15 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if(submitIdea($db, $invention)){
             $_SESSION['message'] = "Your submission has been sent! We will get back to you soon!";
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;
+            die(header('Location:/submit'));
         } else {
             $errors = "Sorry, there was an error completing your submission. Please try again later.";
             $_SESSION['submission_errors']['general'] = $errors;
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;
+            die(header('Location:/submit'));
         }
     }
 
 
 } else {
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/submit'); exit;
+    die(header('Location:/submit'));
 }

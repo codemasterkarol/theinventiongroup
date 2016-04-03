@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="small-12 columns">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> The Invention Group
+            <p>&copy; <?php echo date('Y'); ?> The Invention Group
                 <a href="/privacy">Privacy Policy</a> | <a href="/refunds">Refund Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
         </div>
     </div>
@@ -20,7 +20,7 @@
 
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="assets/js/jquery.hideseek.min.js"></script>
+<script src="/assets/js/jquery.hideseek.min.js"></script>
 
 <script>
 

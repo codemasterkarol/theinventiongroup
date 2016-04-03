@@ -1,17 +1,15 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
+<?php session_start(); ?><!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Invention Group</title>
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/foundation.min.css">
     <link rel="stylesheet" href="/assets/css/foundation-icons.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 </head>
-
+<body>
 <header>
     <div class="row">
         <div class="auth">
