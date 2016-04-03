@@ -1,18 +1,20 @@
 <?php session_start();
-    var_dump($_SESSION); die;
-    if(!isset($_SESSION['loggedin'])) {
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
-    } else {
+
+    if($_SESSION['loggedin'] === true) {
         session_start();
         require("../includes/header.php");
-?>
 
-    <div class="small-12 columns">
-        <h2>Member's Area</h2>
-        <h3>Welcome to the Member's Only Area, <?php echo $_SESSION['name']; ?>!</h3>
-        <p>This is where you can check the status of your submissions!</p>
-    </div>
+    ?>
 
-<?php }
+        <div class="small-12 columns">
+            <h2>Member's Area</h2>
+            <h3>Welcome to the Member's Only Area, <?php echo $_SESSION['name']; ?>!</h3>
+            <p>This is where you can check the status of your submissions!</p>
+        </div>
 
-require ("../includes/footer.php");
+    <?php require ("../includes/footer.php");
+
+    } else {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/');
+        exit;
+    }
