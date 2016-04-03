@@ -31,19 +31,19 @@
 
     <div class="small-12 medium-4 columns">
        <a href="about"><div class="feature">
-               <img src="assets/img/findmoney.svg" alt="Find money">
+               <img src="/assets/img/findmoney.svg" alt="Find money">
             <p>We find interested parties to provide funding for your project.</p>
         </div></a>
     </div>
     <div class="small-12 medium-4 columns">
         <a href="expertise"><div class="feature">
-                <img src="assets/img/factory.svg" alt="Hand money">
+                <img src="/assets/img/factory.svg" alt="Hand money">
             <p>We find companies to develop and distribute your invention.</p>
         </div></a>
     </div>
     <div class="small-12 medium-4 columns">
         <a href="process"><div class="feature">
-                <img src="assets/img/handmoney.svg" alt="Hand money">
+                <img src="/assets/img/handmoney.svg" alt="Hand money">
             <p>We give you a generous royalty fee for all of your sales.</p>
         </div></a>
     </div>
