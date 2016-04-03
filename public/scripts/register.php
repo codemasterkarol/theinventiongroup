@@ -149,7 +149,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if(empty($_POST['password'])){
         $errors['password'] = "Please enter a password.";
     } else {
-        if(strlen($_POST['password'] < 8)) {
+        if(strlen($_POST['password']) < 8) {
             $errors['password'] = "Your password must be at least 8 characters.";
         } else {
             $password = hashPassword($_POST['password']);
@@ -254,9 +254,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             'password'  => $password
         ];
 
+
         if(createNewUser($db, $newUser)){
             $_SESSION['loggedin'] = true;
-            $_SESSION['register'] = "You have successfully registered and have automatically been logged in.";
+            $_SESSION['message'] = "You have successfully registered and have automatically been logged in.";
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
         } else {
             $errors['general'] = "Sorry, there was an error completing your registration. Please try again later.";

@@ -45,6 +45,13 @@ h3:not(:first-of-type) {
     color: #fff;
 }
 
+.message {
+    background: #457642;
+    border: 1px solid #222;
+    color: #fff;
+    padding: 1rem;
+}
+
 ul:not(.menu) {
     margin-left: 2rem;
     list-style: none;
@@ -97,6 +104,23 @@ header.fixed img {
 }
 header.fixed nav {
     margin-top: 1rem;
+}
+header .row {
+    position: relative;
+}
+header .row .auth {
+    position: absolute;
+    top: -2rem;
+    right: 1rem;
+}
+header.fixed .row .auth {
+    top: -1rem;
+}
+header .row .auth .button {
+    font-size: 0.8rem;
+}
+header.fixed .row .auth .button {
+    font-size: 0.75rem;
 }
 
 .feature {
@@ -236,7 +260,7 @@ label {
     text-align: right;
     display: block;
 }
-button {
+button, .button {
     font-family: "Oswald", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     background: #00AEEF;
     padding: 0.5rem 1rem;
@@ -246,8 +270,11 @@ button {
     margin: 1rem 0 0;
     transition: all ease 0.5s;
 }
-button:hover {
+button:hover, .button:hover {
     background: #F8991D;
+}
+header .button {
+    margin-top: 0;
 }
 .custom-file-input::-webkit-file-upload-button {
     visibility: hidden;

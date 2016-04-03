@@ -1,5 +1,10 @@
 <?php require("../includes/header.php");?>
 
+<?php
+    if($_SESSION['message']) { ?>
+        <p class="message"> <?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+<?php } ?>
+
 <div class="small-12 columns">
     <div class="calltoaction">
         <p class="tagline">We Help Get Your New Idea Off the Ground</p>

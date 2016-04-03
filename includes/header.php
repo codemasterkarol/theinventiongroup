@@ -16,15 +16,15 @@
 
 <header>
     <div class="row">
-        <div class="small-12 columns text-right">
+        <div class="auth">
             <?php if($_SESSION['loggedin']) { ?>
-            <a href="/members">Members Area</a> | <a href="/scripts/logout.php"></a>
+                <a href="/members" class="button">Members Area</a>
+                <a href="/scripts/logout.php" class="button">Logout</a>
             <?php } else { ?>
-            <a href="/register">Register</a> | <a href="/login">Login</a>
+                <a href="/register" class="button">Register</a>
+                <a href="/login" class="button">Login</a>
             <?php } ?>
         </div>
-    </div>
-    <div class="row">
         <div class="small-12 medium-4 columns">
             <a href="/"><img src="/assets/img/newlogo.svg" alt="The Invention Group"></a>
         </div>

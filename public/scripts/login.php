@@ -26,36 +26,50 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @param $password
      * @return bool|string
      */
-    function verifyPassword($password) {
-        return password_verify($password, PASSWORD_BCRYPT);
+    function hashPassword($password) {
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 
-
     /**
-     * Checks to see if the user already exists in the database
-     * @param $email
+     * Verifies password input with the hashed password
+     * @param $password
+     * @param $hash
      * @return bool
      */
-    function doesUserExist($db, $email) {
-        // prepared statement for running the query
-        $query = "SELECT 1 FROM users WHERE email = :email";
-        // parameters to pass onto the prepared statement
-        // it is done this way to prevent any SQL injection
-        $query_params = array(':email' => $email);
-        // try prepared statement, handle any exceptions
-        try{
+    function verifyPassword($password, $hash) {
+        return password_verify($password, $hash);
+    }
+
+    /**
+     * Logs the user in after ensuring that the user exists and the password matches
+     * @param $db
+     * @param $email
+     */
+    function login($db, $email){
+        $query = "SELECT * FROM users WHERE `email` = :email";
+        $query_params = array('email' => $email);
+        try {
             $stmt = $db->prepare($query);
             $stmt->execute($query_params);
+            $row = $stmt->fetch();
 
-            if($stmt->rowCount() > 0){
-                return true;
-            } else {
-                return false;
+            if($row){
+                if(verifyPassword($_POST['password'],$row['password'])) {
+                    // set logged in bool and message
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['message'] = "You have successfully logged in!";
+                    // redirect
+                    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+                } else {
+                    $_SESSION['login_errors'] = "Sorry, we could not find that username/password combination.
+                        Please try again.";
+                    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
+                }
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
-            $errors['general'] = "Sorry, we could not complete your request at this time. Please try again later.";
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
+            $_SESSION['login_errors'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
         }
     }
 
@@ -71,36 +85,18 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['email'] = "Please enter your email address.";
     } else {
         $email = filterEmailInput($_POST['email']);
-        if($email){
-            if (doesUserExist($db, $email)) {
-                $errors['userexists'] = "A user already exists with that email address.
-                Try <a href='/login'>Logging in?</a>";
-                $_SESSION['login_errors'] = $errors;
-                header('Location:http://' . $_SERVER['HTTP_HOST'] . '/register'); exit;
-            }
-        } else {
+        if(!$email){
             $errors['email'] = "Please enter a valid email address.";
         }
     }
-
 
 
     /**
      * Filters the password post item
      */
     if(empty($_POST['password'])){
-        $errors['password'] = "Please enter a password.";
-    } else {
-        if(strlen($_POST['password'] < 8)) {
-            $errors['password'] = "Your password must be at least 8 characters.";
-        } else {
-            $password = hashPassword($_POST['password']);
-            if ($password === false) {
-                $errors['password'] = "There was a problem with the password you chose. Please try again.";
-            }
-        }
+        $errors['password'] = "Please enter your password.";
     }
-
 
 
     /**
@@ -108,36 +104,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the login form
      * If none are found, it will process the login.
      */
-    if(empty($errors['login_errors'])) {
-
-        /**
-         * Creates a new user array using the input submitted
-         * this will then be passed onto the database to create a new user record
-         */
-        $newUser = [
-            'name'      => $name,
-            'email'     => $email,
-            'address'   => $address,
-            'city'      => $city,
-            'state'     => $state,
-            'zip'       => $zip,
-            'dayphone'  => $dayphone,
-            'evephone'  => $evephone,
-            'password'  => $password
-        ];
-
-        if(createNewUser($db, $newUser)){
-            $_SESSION['loggedin'] = true;
-            $_SESSION['register'] = "You have successfully registered and have automatically been logged in.";
-            header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
-        } else {
-            $errors['general'] = "Sorry, there was an error logging in. Please try again later.";
-            $_SESSION['login_errors'] = $errors;
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/line265'); exit;
-        }
-
+    if(empty($_SESSION['login_errors'])) {
+        login($db, $email);
     } else {
-        $_SESSION['login_errors'] = $errors;
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
     }
 

@@ -3,9 +3,12 @@
 <div class="small-12 columns">
     <h2>Login</h2>
 
+    <?php if($_SESSION['login_errors']){
+        echo '<p class="error">' . $_SESSION['login_errors'] . '</p>';
+    } ?>
     <form id="login" method="post" action="scripts/login.php">
-        <input type="text" required name="username" placeholder="Username"><label for="name">Username</label>
-        <input type="password" required name="password" placeholder="Password"><label for="email">Password</label>
+        <input type="text" required name="email" placeholder="Username"><label for="email">Username (email address)</label>
+        <input type="password" required name="password" placeholder="Password"><label for="password">Password</label>
         <button>Login</button>
     </form>
 </div>
