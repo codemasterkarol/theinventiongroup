@@ -74,8 +74,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      */
     if (!empty($errors)) {
         $_SESSION['contact_errors'] = $errors;
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact');
-        exit;
     } else {
         $to = 'codemasterkarol@gmail.com';
         $subject = "Invention Group: New Contact Form Message";
@@ -87,9 +85,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         mail($to, $subject, $body, $headers);
         http_response_code(200);
         $_SESSION['message'] = "Your message has been sent successfully!";
-        header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact');
-        exit;
     }
+
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact');
+    exit;
+
 } else {
     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact'); exit;
 }
