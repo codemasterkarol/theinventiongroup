@@ -60,14 +60,16 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     // redirect
                     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
                 } else {
-                    $_SESSION['login_errors']['message'] = "Sorry, we could not find that username/password combination.
+                    $errors['message'] = "Sorry, we could not find that username/password combination.
                         Please try again.";
+                    $_SESSION['login_errors'] = $errors;
                     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
                 }
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
-            $_SESSION['login_errors']['message'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            $errors['message'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            $_SESSION['login_errors'] = $errors;
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
         }
     }
@@ -81,11 +83,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If it does, it will throw an error and return the user to the form
      */
     if(empty($_POST['email'])){
-        $_SESSION['login_errors']['email'] = "Please enter your email address.";
+        $errors['email'] = "Please enter your email address.";
     } else {
         $email = filterEmailInput($_POST['email']);
         if(!$email){
-            $_SESSION['login_errors']['email'] = "Please enter a valid email address.";
+            $errors['email'] = "Please enter a valid email address.";
         }
     }
 
@@ -94,7 +96,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * Filters the password post item
      */
     if(empty($_POST['password'])){
-        $_SESSION['login_errors']['password'] = "Please enter your password.";
+        $errors['password'] = "Please enter your password.";
     }
 
 
@@ -103,9 +105,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the login form
      * If none are found, it will process the login.
      */
-    if(empty($_SESSION['errors'])) {
+    if(empty($errors)) {
         login($db, $email);
     } else {
+        $_SESSION['login_errors'] = $errors;
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
     }
 
