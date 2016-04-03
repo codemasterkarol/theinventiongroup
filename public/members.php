@@ -1,11 +1,9 @@
 <?php
-session_start();
-require("../includes/header.php");
-
-if(!isset($_SESSION['loggedin'])) {
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
-} else {
-    ?>
+    if(!isset($_SESSION['loggedin'])) {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
+    } else {
+        require("../includes/header.php");
+?>
 
     <div class="small-12 columns">
         <h2>Member's Area</h2>
