@@ -201,6 +201,12 @@ header .row .auth span {
     min-height: 3rem;
 }
 
+.disclaimer {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+}
+
 footer nav {
     margin-top: 1rem;
 }

@@ -109,6 +109,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         // set logged in bool and message
         $_SESSION['id'] = $userDetails['id'];
         $_SESSION['name'] = $userDetails['name'];
+        $_SESSION['email'] = $userDetails['email'];
         $_SESSION['loggedin'] = true;
         $_SESSION['message'] = "You have successfully logged in!";
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
