@@ -10,7 +10,7 @@
         if(!empty($_SESSION['submission_errors']['message'])) { echo '<p class="error">' . $_SESSION['submission_errors']['message'] . '</p>'; unset($_SESSION['submission_errors']['message']); }
 
         ?>
-        <form id="submit-idea" method="post" action="scripts/submitidea.php">
+        <form id="submit-idea" method="post" action="/scripts/submitidea.php">
             <h4>Inventor Information</h4>
             <input type="text" required name="name" placeholder="Nikola Tesla"  <?php if(!empty($_SESSION['name'])){ echo "value='{$_SESSION['name']}'"; } ?>><label for="name">Name</label>
             <?php if(!empty($_SESSION['submission_errors']['name'])) { echo '<p class="error">' . $_SESSION['submission_errors']['name'] . '</p>'; unset($_SESSION['submission_errors']['name']);} ?>

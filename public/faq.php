@@ -33,7 +33,7 @@
 
             <p>The license allows you (the inventor) to make money by giving a manufacturer the right to produce and sell your product.</p>
 
-            <p><a href="submit">Get started with a free evaluation now.</a>
+            <p><a href="/submit">Get started with a free evaluation now.</a>
         </li>
         <li>
             <h4>Do I need to patent my invention before I contact you?</h4>

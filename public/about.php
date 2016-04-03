@@ -18,7 +18,7 @@
 
     <p>We maintain the largest network of sales offices in the country. We'll use those connections to drive sales through the roof.</p>
 
-    <p>Lets get started! <a href="submit">Click here to request your free invention evaluation</a>.</p>
+    <p>Lets get started! <a href="/submit">Click here to request your free invention evaluation</a>.</p>
     </h3>
 </div>
 

@@ -1,4 +1,4 @@
-</div>
+    </div>
 </section>
 
 <footer>
@@ -54,5 +54,5 @@
     }).scroll();
 </script>
 
-</body>
+    </body>
 </html>

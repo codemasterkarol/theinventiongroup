@@ -6,7 +6,7 @@
         echo '<p class="error">' . $_SESSION['registration_errors']['userexists'] . '</p>';
         unset($_SESSION['registration_errors']['userexists']);
     }; ?>
-    <form id="register" method="post" action="scripts/register.php">
+    <form id="register" method="post" action="/scripts/register.php">
         <p><input type="text" required name="name" placeholder="Nikola Tesla"><label for="name">Name</label></p>
         <?php if(!empty($_SESSION['registration_errors']['name'])) { echo '<p class="error">' . $_SESSION['registration_errors']['name'] . '</p>';} ?>
         <p><input type="email" required name="email" placeholder="genius@edisonsucks.com"><label for="email">Email (will double as your username)</label></p>
