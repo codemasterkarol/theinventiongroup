@@ -1,11 +1,11 @@
 <?php require("../includes/header.php");?>
+<div class="small-12 columns">
 
-<?php
+    <?php
     if($_SESSION['message']) { ?>
         <p class="message"> <?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
-<?php } ?>
+    <?php } ?>
 
-<div class="small-12 columns">
     <div class="calltoaction">
         <p class="tagline">We Help Get Your New Idea Off the Ground</p>
         <p class="description">If you have a new invention idea, our team can help you make sure that you are very successful when it comes time to sell your new product. We have been consulting with inventors for over 30 years and we can make sure you are successful, too.</p>

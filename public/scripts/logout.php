@@ -1,5 +1,4 @@
 <?php
-require_once("../../scripts/common.php");
 /**
  * Created by PhpStorm.
  * User: karolbrennan
@@ -9,7 +8,7 @@ require_once("../../scripts/common.php");
 /**
  * destroys the current user's session
  */
+session_start();
 session_unset();
-session_destroy();
-$_SESSION['loggedin'] = false;
+$_SESSION['message'] = "You have successfully logged out.";
 header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;

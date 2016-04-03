@@ -56,6 +56,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             if($row){
                 if(verifyPassword($_POST['password'],$row['password'])) {
                     // set logged in bool and message
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['name'] = $row['name'];
                     $_SESSION['loggedin'] = true;
                     $_SESSION['message'] = "You have successfully logged in!";
                     // redirect

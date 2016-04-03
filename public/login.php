@@ -5,7 +5,7 @@
 
     <?php if($_SESSION['login_errors']){
         echo '<p class="error">' . $_SESSION['login_errors'] . '</p>';
-    } ?>
+    } session_destroy(); unset($_SESSION);?>
     <form id="login" method="post" action="scripts/login.php">
         <input type="text" required name="email" placeholder="Username"><label for="email">Username (email address)</label>
         <input type="password" required name="password" placeholder="Password"><label for="password">Password</label>

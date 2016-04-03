@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +15,8 @@
 <header>
     <div class="row">
         <div class="auth">
-            <?php if($_SESSION['loggedin']) { ?>
-                <a href="/members" class="button">Members Area</a>
+            <?php if($_SESSION['loggedin']) { echo "<span>Welcome, " . $_SESSION['name'] . "!</span>"; ?>
+                <a href="/members" class="button">Member's Area</a>
                 <a href="/scripts/logout.php" class="button">Logout</a>
             <?php } else { ?>
                 <a href="/register" class="button">Register</a>

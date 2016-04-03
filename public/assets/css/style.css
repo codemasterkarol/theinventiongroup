@@ -122,6 +122,10 @@ header .row .auth .button {
 header.fixed .row .auth .button {
     font-size: 0.75rem;
 }
+header .row .auth span {
+    font-size: 0.8rem;
+    margin-right: 1rem;
+}
 
 .feature {
     padding: 1rem;
