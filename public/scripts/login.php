@@ -60,14 +60,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     // redirect
                     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
                 } else {
-                    $_SESSION['login_errors'] = "Sorry, we could not find that username/password combination.
+                    $_SESSION['login_errors']['message'] = "Sorry, we could not find that username/password combination.
                         Please try again.";
                     header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
                 }
             }
         } catch(PDOException $exception) {
             error_log($exception->getMessage());
-            $_SESSION['login_errors'] = "Sorry, we could not complete your request at this time. Please try again later.";
+            $_SESSION['login_errors']['message'] = "Sorry, we could not complete your request at this time. Please try again later.";
             header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login'); exit;
         }
     }
