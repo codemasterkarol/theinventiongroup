@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 /**
  * Created by PhpStorm.
  * User: karolbrennan
@@ -79,15 +79,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     } else {
         $to = 'codemasterkarol@gmail.com';
         $subject = "Invention Group: New Contact Form Message";
-        $headers = 'From: webmaster@example.com' . "\r\n";
-        $body = "New contact from: {$name}.\n
-                Subject: {$subject}\n
-                Message: {$message}";
+        $headers = "From: {$name} <{$email}>";
+        $body  = "New contact from: {$name}\n";
+        $body .= "Subject: {$subject}\n";
+        $body .= "Message: {$message}";
+
         mail($to, $subject, $body, $headers);
+        http_response_code(200);
         $_SESSION['message'] = "Your message has been sent successfully!";
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact');
         exit;
     }
 } else {
-    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contacat'); exit;
+    header('Location:http://' . $_SERVER['HTTP_HOST'] . '/contact'); exit;
 }

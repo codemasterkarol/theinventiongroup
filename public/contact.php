@@ -6,9 +6,9 @@
     <?php if(!empty($_SESSION['contact_errors']['message'])) { echo '<p class="error">' . $_SESSION['contact_errors']['message'] . '</p>'; unset($_SESSION['contact_errors']['message']); } ?>
 
     <form id="contact" method="post" action="scripts/contact.php">
-        <input type="text" name="Name" placeholder="Nikola Tesla" required><label for="name">Name</label>
+        <input type="text" name="name" placeholder="Nikola Tesla" required><label for="name">Name</label>
         <?php if(!empty($_SESSION['contact_errors']['name'])) { echo '<p class="error">' . $_SESSION['contact_errors']['name'] . '</p>'; unset($_SESSION['contact_errors']['email']);} ?>
-        <input type="email" name="Email" placeholder="genius@edisonsucks.com" required><label for="email">Email</label>
+        <input type="email" name="email" placeholder="genius@edisonsucks.com" required><label for="email">Email</label>
         <?php if(!empty($_SESSION['contact_errors']['email'])) { echo '<p class="error">' . $_SESSION['contact_errors']['email'] . '</p>';} ?>
         <textarea name="message" placeholder="Gosh, I wish I had heard of you guys, that jerk Edison stole all of my ideas. You guys could have surely helped secure my patents!" required></textarea><label for="message">Message</label>
         <?php if(!empty($_SESSION['contact_errors']['message'])) { echo '<p class="error">' . $_SESSION['contact_errors']['message'] . '</p>'; unset($_SESSION['contact_errors']['email']);} ?>
