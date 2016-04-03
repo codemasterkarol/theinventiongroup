@@ -56,7 +56,13 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $row = $stmt->fetch();
 
             if($row){
-                return $row;
+                if(verifyPassword($_POST['password'],$row['password'])) {
+                    return $row;
+                } else {
+                    $errors['message'] = "Sorry, we could not find that username/password combination.
+                        Please try again.";
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -101,17 +107,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/login');
         exit;
     } else {
-        if(verifyPassword($_POST['password'],$userDetails['password'])) {
-            // set logged in bool and message
-            $_SESSION['id'] = $userDetails['id'];
-            $_SESSION['name'] = $userDetails['name'];
-            $_SESSION['loggedin'] = true;
-            $_SESSION['message'] = "You have successfully logged in!";
-        } else {
-            $errors['message'] = "Sorry, we could not find that username/password combination.
-                        Please try again.";
-        }
-        $_SESSION['login_errors'] = $errors;
+        // set logged in bool and message
+        $_SESSION['id'] = $userDetails['id'];
+        $_SESSION['name'] = $userDetails['name'];
+        $_SESSION['loggedin'] = true;
+        $_SESSION['message'] = "You have successfully logged in!";
         header('Location:http://' . $_SERVER['HTTP_HOST'] . '/'); exit;
     }
 
