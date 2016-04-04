@@ -21,10 +21,10 @@
                 <a href="/login" class="button">Login</a>
             <?php } ?>
         </div>
-        <div class="small-12 medium-4 columns">
+        <div class="small-12 medium-3 columns">
             <a href="/"><img src="/assets/img/newlogo.svg" alt="The Invention Group"></a>
         </div>
-        <div class="small-12 medium-8 columns">
+        <div class="small-12 medium-9 columns">
             <?php require("nav.php"); ?>
         </div>
     </div>

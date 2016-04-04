@@ -68,9 +68,11 @@ ul:not(.menu) li:before {
 nav {
     float: right;
 }
-
+nav #menutoggle {
+    display: none;
+}
 header nav {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 nav .menu a {
     font-family: "Oswald", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -82,7 +84,7 @@ nav .menu a {
 nav .menu a:hover {
     color: #00aeef;
 }
-header nav .active a {
+header nav li.active a {
     border-bottom: 0.2rem solid #00aeef;
 }
 header {
@@ -100,10 +102,7 @@ header.fixed {
 }
 
 header.fixed img {
-    max-width: 70%;
-}
-header.fixed nav {
-    margin-top: 1rem;
+    max-width: 80%;
 }
 header .row {
     position: relative;
@@ -385,3 +384,120 @@ ul.faqlist li:before {
     margin-right: 1rem;
 }
 
+
+
+@media Print {
+    .calltoaction .tagline {
+        font-size: 1.5rem;
+    }
+    header:before {
+        display: block;
+        text-align: center;
+        content: "The Invention Group";
+        font-family: "Oswald", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 2rem;
+    }
+    .auth, .features .feature img, nav, footer, header a, .actionbtn  {
+        display: none;
+    }
+    .features a {
+        font-size: 0;
+        color: #fff;
+        margin: 0;
+    }
+    .features .feature {
+        min-height: 1rem !important;
+        margin-bottom: 1rem;
+        padding: 0;
+        font-size: 1rem;
+    }
+}
+
+
+@media screen and (max-width: 40em){
+
+    header img {
+        max-width: 60%;
+        margin: 1rem auto;
+        display: block;
+    }
+
+    header .row {
+        position: inherit;
+    }
+    header .row .auth {
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        top: inherit;
+        right: inherit;
+        bottom: 0;
+        left: 0;
+        background: rgba(255,255,255,0.85);
+        padding: 1rem 0;
+    }
+
+    header nav {
+        margin-top: 0;
+        width: 100%;
+        display: block;
+    }
+    nav .menu {
+        display: none;
+        text-align: center;
+    }
+    header nav #menutoggle{
+        display: block;
+    }
+    #menutoggle {
+        padding: 0.5rem 2rem;
+        text-align: right;
+        display: block;
+        background: #00AEEF;
+        color: #fff;
+    }
+    nav * {
+        transition: all ease 0.5s;
+    }
+    nav .menu.active {
+        display: block;
+    }
+    .menu li {
+        display: block;
+        width: 100%;
+    }
+
+    .calltoaction .tagline, .calltoaction h3 {
+        font-size: 2rem;
+    }
+    .calltoaction:last-of-type {
+        padding: 1rem;
+    }
+    .calltoaction:last-of-type .action {
+        display: none;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .step {
+        min-height: 1rem;
+    }
+
+    footer {
+        padding-bottom: 6rem;
+    }
+    footer .menu {
+        display: none;
+    }
+    footer a img {
+        margin: 0 auto;
+        display: block;
+    }
+    footer p, footer span {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+    }
+}

@@ -1,4 +1,6 @@
 <?php require_once('credentials.php'); // pulls in my credentials for connecting to the database
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 // Here is the variables needed for connecting:
 // $username = '';

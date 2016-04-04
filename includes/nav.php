@@ -1,6 +1,7 @@
 <?php $url = $_SERVER["REQUEST_URI"]; ?>
 
 <nav>
+    <a id="menutoggle" href="#"><i class="fi-list"></i> Menu</a>
     <ul class="menu">
         <li<?= ($url === '/about') ? ' class="active"' : ''; ?>><a href="/about">About</a></li>
         <li<?= ($url === '/expertise') ? ' class="active"' : ''; ?>><a href="/expertise">Expertise</a></li>

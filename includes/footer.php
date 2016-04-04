@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="small-12 columns">
-            <p>&copy; <?php echo date('Y'); ?> The Invention Group
+            <p><span>&copy; <?php echo date('Y'); ?> The Invention Group</span>
                 <a href="/privacy">Privacy Policy</a> | <a href="/refunds">Refund Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
         </div>
     </div>
@@ -33,24 +33,24 @@
         });
     });
 
+    $(document).ready(function(){
+        $('#menutoggle').click(function(){
+            $('nav .menu').toggleClass('active')
+        });
+    });
+
     $(window).scroll(function() {
         var windscroll = $(window).scrollTop();
-        if (windscroll >= 10) {
-            $('header').addClass('fixed');
-            $('#content').addClass('fixedheader');
-        } else {
-            $('header').removeClass('fixed');
-            $('#content').removeClass('fixedheader');
+
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+            if (windscroll >= 10) {
+                $('header').addClass('fixed');
+                $('#content').addClass('fixedheader');
+            } else {
+                $('header').removeClass('fixed');
+                $('#content').removeClass('fixedheader');
+            }
         }
-//        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ){
-//            if(windscroll >= 50){
-//                $('header').addClass('scroll');
-//                $('header h1').html('KB');
-//            } else {
-//                $('header').removeClass('scroll');
-//                $('header h1').html('Karol Brennan  ');
-//            }
-//        }
     }).scroll();
 </script>
 

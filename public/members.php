@@ -2,7 +2,7 @@
 
     if($_SESSION['loggedin'] === true) {
         require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php");
-        require("/scripts/members.php");
+        require($_SERVER['DOCUMENT_ROOT'] . "/scripts/members.php");
     ?>
 
         <div class="small-12 columns">
