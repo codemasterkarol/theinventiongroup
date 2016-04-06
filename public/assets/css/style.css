@@ -396,6 +396,11 @@ ul.faqlist li:before {
     margin-right: 1rem;
 }
 
+.inventions image {
+    width: 10rem;
+    height: auto;
+}
+
 
 
 @media Print {
