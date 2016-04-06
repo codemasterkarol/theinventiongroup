@@ -149,7 +149,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $i = 1;
             $uploadfile = $uploaddir . basename($imageName);
             move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile);
-            $image = "<img src='/assets/img/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
+            $image = "<img src='/assets/img/uploads/" . $_SESSION['id'] . '/' . $imageName . "'>";
         } else {
             $_SESSION['submission_errors'] = $errors;
             die(header("Location:/submit"));

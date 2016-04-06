@@ -26,7 +26,7 @@
 
                 if(!empty($_SESSION['inventions'])) {
                     echo "
-                        <table>
+                        <table class='inventions'>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
