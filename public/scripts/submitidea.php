@@ -115,8 +115,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
 
     // Settings for file uploads
+    $imageName = $_FILES['image']['name'];
     $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/uploads/' . $_SESSION['id'] . '/';
-    $uploadfile = $uploaddir . basename($_FILES['image']['name']);
 
     /**
      * Filters the invention post
@@ -136,6 +136,18 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     die(header("Location:/submit"));
                 }
             }
+            // set number to append to file if it exists
+            $i = 1;
+            // if the file exists, it'll change the file name by appending a number
+            while(file_exists($uploaddir . $imageName)) {
+                // I use the files attribute to get the raw file name instead of the already changed in
+                // case the variable $imageName has already been changed
+                $imageName = $_FILES['image']['name'] . "_{$i}";
+                $i++;
+            };
+            // reset $i
+            $i = 1;
+            $uploadfile = $uploaddir . basename($imageName);
             move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile);
             $image = "<img src='/assets/img/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
         }
