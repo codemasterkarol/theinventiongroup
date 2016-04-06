@@ -1,4 +1,6 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/../scripts/common.php");
+<?php
+session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . "/../scripts/common.php");
 
 /**
  * Checks to ensure it's a legitimate post request
@@ -25,7 +27,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @return mixed numeric value
      */
     function filterNumericInput($input){
-        return preg_replace('/\D/', '', $input);
+        return intval(preg_replace('/\D/', '', $input));
     }
 
     /**
@@ -121,6 +123,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['email'] = "Please enter your email address.";
     } else {
         $email = filterEmailInput($_POST['email']);
+        $_SESSION['email'] = $email;
         if($email){
             if (doesUserExist($db, $email)) {
                 $errors['userexists'] = "A user already exists with that email address.
@@ -140,6 +143,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['name'] = "Please enter your name.";
     } else {
         $name = filterTextInput($_POST['name']);
+        $_SESSION['name'] = $name;
     }
 
     /**
@@ -165,6 +169,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['address'] = "Please enter your street address.";
     } else {
         $address = filterTextInput($_POST['address']);
+        $_SESSION['address'] = $address;
     }
 
     /**
@@ -174,6 +179,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['city'] = "Please enter your city.";
     } else {
         $city = filterTextInput($_POST['city']);
+        $_SESSION['city'] = $city;
     }
 
     // List of state abbreviations
@@ -187,8 +193,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     } else {
         if(in_array($_POST['state'], $us_state_abbrevs)) {
             $state = $_POST['state'];
+            $_SESSION['state'] = $state;
         } else {
             $errors['state'] = "Please enter a valid state abbreviation.";
+            $_SESSION['state'] = $_POST['state'];
         }
     }
 
@@ -199,8 +207,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['zip'] = "Please enter your zip code.";
     } else {
         $zip = filterNumericInput($_POST['zip']);
+        $_SESSION['zip'] = $zip;
         if(strlen($zip) !== 5) {
             $errors['zip'] = "Please enter a valid zip code.";
+            $_SESSION['zip'] = $_POST['zip'];
         }
     }
 
@@ -212,7 +222,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['dayphone'] = "Please enter your daytime phone number.";
     } else {
         $dayphone = filterNumericInput($_POST['dayphone']);
-        if(strlen($dayphone) !== '10' ||  strlen($dayphone) !== '11') {
+        $_SESSION['dayphone'] = $dayphone;
+        if(strlen($dayphone) < '10' ||  strlen($dayphone) >'11') {
             $errors['dayphone'] = "Please enter a valid daytime phone number.";
         }
     }
@@ -225,7 +236,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $errors['dayphone'] = "Please enter your evening phone number.";
     } else {
         $evephone = filterNumericInput($_POST['evephone']);
-        if(strlen($evephone) !== '10' || strlen($evephone) !==  '11') {
+        $_SESSION['evephone'] = $evephone;
+        if(strlen($evephone) < '10' || strlen($evephone) >  '11') {
             $errors['evephone'] = "Please enter a valid evening phone number.";
         }
     }
@@ -235,7 +247,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * If any are found, it will redirect to the registration form
      * If none are found, it will process the registration.
      */
-    if(empty($errors['registration_errors'])) {
+    if(empty($errors)) {
 
         /**
          * Creates a new user array using the input submitted
@@ -256,8 +268,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if(createNewUser($db, $newUser)){
             $_SESSION['id'] = $db->lastInsertId();
-            $_SESSION['name'] = $newUser['name'];
-            $_SESSION['email'] = $newUser['email'];
             $_SESSION['loggedin'] = true;
             $_SESSION['message'] = "You have successfully registered and have automatically been logged in.";
             die(header('Location:/members'));

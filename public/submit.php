@@ -1,4 +1,21 @@
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php"); ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php");
+
+    $formValues = [
+        'name' => !empty($_SESSION['name']) ? $_SESSION['name'] : '',
+        'email' => !empty($_SESSION['email']) ? $_SESSION['email'] : '',
+        'inv_name' => !empty($_SESSION['inv_name']) ? $_SESSION['inv_name'] : '',
+        'description' => !empty($_SESSION['description']) ? $_SESSION['description'] : ''
+    ];
+    
+    $errors = [
+        'name' => !empty($_SESSION['submission_errors']['name']) ? "<p class='error'>" . $_SESSION['submission_errors']['name'] . "</p>" : '',
+        'email' => !empty($_SESSION['submission_errors']['email']) ? "<p class='error'>" . $_SESSION['submission_errors']['email'] . "</p>" : '',
+        'inv_name' => !empty($_SESSION['submission_errors']['inv_name']) ? "<p class='error'>" . $_SESSION['submission_errors']['inv_name'] . "</p>" : '',
+        'description' => !empty($_SESSION['submission_errors']['description']) ? "<p class='error'>" . $_SESSION['submission_errors']['description'] . "</p>" : '',
+        'image' => !empty($_SESSION['submission_errors']['image']) ? "<p class='error'>" . $_SESSION['submission_errors']['image'] . "</p>" : ''
+    ];
+
+?>
 
 <div class="small-12 columns">
     <h2>Submit an Idea</h2>
@@ -10,19 +27,20 @@
         if(!empty($_SESSION['submission_errors']['message'])) { echo '<p class="error">' . $_SESSION['submission_errors']['message'] . '</p>'; unset($_SESSION['submission_errors']['message']); }
 
         ?>
-        <form id="submit-idea" method="post" action="/scripts/submitidea.php">
+        <form id="submit-idea" enctype="multipart/form-data" method="post" action="/scripts/submitidea.php">
             <h4>Inventor Information</h4>
-            <input type="text" required name="name" placeholder="Nikola Tesla"  <?php if(!empty($_SESSION['name'])){ echo "value='{$_SESSION['name']}'"; } ?>><label for="name">Name</label>
-            <?php if(!empty($_SESSION['submission_errors']['name'])) { echo '<p class="error">' . $_SESSION['submission_errors']['name'] . '</p>'; unset($_SESSION['submission_errors']['name']);} ?>
-            <input type="email" required name="email" placeholder="genius@edisonsucks.com"  <?php if(!empty($_SESSION['email'])){ echo "value='{$_SESSION['email']}'"; } ?>><label for="email">Email</label>
-            <?php if(!empty($_SESSION['submission_errors']['email'])) { echo '<p class="error">' . $_SESSION['submission_errors']['email'] . '</p>'; unset($_SESSION['submission_errors']['email']);} ?>
+            <input type="text" required name="name" placeholder="Nikola Tesla" value="<?= $formValues['name'] ?>" <?= !empty($_SESSION['submission_errors']['name']) ? 'class="error"': ''; ?>><label for="name">Name</label>
+            <?= $errors['name']; ?>
+            <input type="email" required name="email" placeholder="genius@edisonsucks.com" value="<?= $formValues['email'] ?>" <?= !empty($_SESSION['submission_errors']['email']) ? 'class="error"': ''; ?>><label for="email">Email</label>
+            <?= $errors['email']; ?>
             <h4>Invention Information</h4>
-            <input type="text" required name="inv_name" placeholder="Alternating Current"><label for="inv_name">Invention Name</label>
-            <?php if(!empty($_SESSION['submission_errors']['inv_name'])) { echo '<p class="error">' . $_SESSION['submission_errors']['inv_name'] . '</p>'; unset($_SESSION['submission_errors']['inv_name']);} ?>
-            <textarea name="description" required placeholder="Edison offered to pay me good money to fix his problems with his DC motor, but I suspect he just wants me for my brain and won't actually pay me..."></textarea><label for="description">Description</label>
-            <?php if(!empty($_SESSION['submission_errors']['description'])) { echo '<p class="error">' . $_SESSION['submission_errors']['description'] . '</p>'; unset($_SESSION['submission_errors']['description']);} ?>
+            <input type="text" required name="inv_name" placeholder="Alternating Current" value="<?= $formValues['inv_namename'] ?>" <?= !empty($_SESSION['submission_errors']['inv_name']) ? 'class="error"': ''; ?>><label for="inv_name">Invention Name</label>
+            <?= $errors['inv_name']; ?>
+            <textarea name="description" required placeholder="Edison offered to pay me good money to fix his problems with his DC motor, but I suspect he just wants me for my brain and won't actually pay me..."  value="<?= $formValues['description'] ?>" <?= !empty($_SESSION['submission_errors']['description']) ? 'class="error"': ''; ?>></textarea><label for="description">Description</label>
+            <?= $errors['description']; ?>
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000">
             <input type="file" class="custom-file-input" name="image" accept="image/*"><label for="image">Image</label>
-            <?php if(!empty($_SESSION['submission_errors']['image'])) { echo '<p class="error">' . $_SESSION['submission_errors']['image'] . '</p>'; unset($_SESSION['submission_errors']['image']);} ?>
+            <?= $errors['image']; ?>
             <h4>Billing Information</h4>
             <h5>Purchase your report for only $150!</h5>
             <input type="text" name="cc" placeholder="9999-9999-9999-9999"><label for="cc">Credit Card Number *</label>
@@ -44,4 +62,6 @@
     <?php } ?>
 </div>
 
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php"); ?>
+<?php
+unset($_SESSION['submission_errors']);
+require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php"); ?>

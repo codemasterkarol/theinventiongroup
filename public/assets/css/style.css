@@ -44,7 +44,18 @@ h3:not(:first-of-type) {
 .error a:hover {
     color: #fff;
 }
-
+form p.error {
+    font-size: 0.8rem;
+    background: transparent;
+    color: red;
+    font-style: italic;
+    border: none;
+    padding: 0;
+}
+input.error {
+    background: rgba(255, 0, 0, 0.38);
+    color: #0a0a0a;
+}
 .message {
     background: #457642;
     border: 1px solid #222;
@@ -230,13 +241,14 @@ footer p {
 
 /* Forms */
 #contact, #submit-idea, #login, #register {
-    width: 30rem;
+    width: 40rem;
     max-width: 100%;
     margin: 2rem auto;
     background: #f9f9f9;
     box-shadow: 0.2rem 0.2rem 0 rgba(0,0,0,0.1);
     padding: 2rem;
 }
+
 
 [type=text], [type=password], [type=date], [type=datetime],
 [type=datetime-local], [type=month], [type=week], [type=email],

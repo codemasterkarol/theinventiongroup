@@ -2,7 +2,7 @@
 <div class="small-12 columns">
 
     <?php
-    if($_SESSION['message'] || isset($_GET['logout'])) { ?>
+    if(!empty($_SESSION['message']) || !empty($_GET['logout'])) { ?>
         <p class="message">
             <?php
             if(!empty($_SESSION['message'])) {

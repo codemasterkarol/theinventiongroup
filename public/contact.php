@@ -1,4 +1,17 @@
-<?php session_start(); require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php"); ?>
+<?php session_start(); require($_SERVER['DOCUMENT_ROOT'] . "/../includes/header.php");
+
+$formValues = [
+    'name' => !empty($_SESSION['name']) ? $_SESSION['name'] : '',
+    'email' => !empty($_SESSION['email']) ? $_SESSION['email'] : '',
+    'message' => !empty($_SESSION['message']) ? $_SESSION['message'] : ''
+];
+
+$errors = [
+    'name' => !empty($_SESSION['contact_errors']['name']) ? "<p class='error'>" . $_SESSION['contact_errors']['name'] . "</p>" : '',
+    'email' => !empty($_SESSION['contact_errors']['email']) ? "<p class='error'>" . $_SESSION['contact_errors']['email'] . "</p>" : '',
+    'message' => !empty($_SESSION['contact_errors']['message']) ? "<p class='error'>" . $_SESSION['contact_errors']['message'] . "</p>" : ''
+];
+?>
 
 <div class="small-12 columns">
     <h2>Contact Us</h2>
@@ -18,4 +31,5 @@
     </form>
 </div>
 
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php"); ?>
+<?php
+require($_SERVER['DOCUMENT_ROOT'] . "/../includes/footer.php"); ?>
