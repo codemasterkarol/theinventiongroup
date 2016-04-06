@@ -114,14 +114,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
 
-    // Settings for file uploads
-    $imageName = $_FILES['image']['name'];
-    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/uploads/' . $_SESSION['id'] . '/';
-
     /**
      * Filters the invention post
      */
     if (!empty($_FILES['image'])) {
+
+        // Settings for file uploads
+        $imageName = $_FILES['image']['name'];
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/uploads/' . $_SESSION['id'] . '/';
 
         if(!$_FILES['image']['type'] === "image/jpeg"){
             $errors['image'] = "Sorry, only jpeg images are allowed.";
