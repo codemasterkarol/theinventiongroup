@@ -140,9 +140,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $i = 1;
             // if the file exists, it'll change the file name by appending a number
             while(file_exists($uploaddir . $imageName)) {
+                // find the position of the last dot which is where the extension begins
+                $extension_pos = strrpos($_FILES['image']['name'], '.');
                 // I use the files attribute to get the raw file name instead of the already changed in
                 // case the variable $imageName has already been changed
-                $imageName = $_FILES['image']['name'] . "_{$i}";
+                $imageName = substr($_FILES['image']['name'], 0, $extension_pos) . "_{$i}" . substr($_FILES['image']['name'], $extension_pos);
+                // increment $i
                 $i++;
             };
             // reset $i
