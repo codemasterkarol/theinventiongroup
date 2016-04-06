@@ -124,12 +124,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      */
     if (!empty($_FILES['image'])) {
 
-        if($_FILES['image']['type'] !== "image/jpeg"){
+        if(!$_FILES['image']['type'] === "image/jpeg"){
             $errors['image'] = "Sorry, only jpeg images are allowed.";
         } elseif ($_FILES['image']['size'] > 3000000){
             $errors['image'] = "Sorry, your file exceeded our file size limit (3MB).";
         }
-
         if(!empty($errors)) {
             if (!is_dir($uploaddir)) {
                 if (!mkdir($uploaddir, 0777, true)) {
