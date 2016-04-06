@@ -395,12 +395,11 @@ ul.faqlist li:before {
     font-weight: bold;
     margin-right: 1rem;
 }
-
-.inventions image {
+.inventions img {
     width: 10rem;
+    max-width: 100%;
     height: auto;
 }
-
 
 
 @media Print {
