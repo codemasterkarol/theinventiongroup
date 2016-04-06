@@ -40,7 +40,7 @@
             <textarea name="description" required placeholder="Edison offered to pay me good money to fix his problems with his DC motor, but I suspect he just wants me for my brain and won't actually pay me..."  value="<?= $formValues['description'] ?>" <?= !empty($_SESSION['submission_errors']['description']) ? 'class="error"': ''; ?>></textarea><label for="description">Description</label>
             <?= $errors['description']; ?>
             <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
-            <input type="file" class="custom-file-input" name="image" accept="image/*"><label for="image">Image</label>
+            <input type="file" class="custom-file-input" name="image" accept="image/*"><label for="image">Image (*jpeg only)</label>
             <?= $errors['image']; ?>
             <h4>Billing Information</h4>
             <h5>Purchase your report for only $150!</h5>

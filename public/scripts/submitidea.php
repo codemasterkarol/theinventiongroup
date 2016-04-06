@@ -120,7 +120,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     /**
      * Filters the invention post
-     * @todo make this actually do something.... lol
      */
     if (!empty($_FILES['image'])) {
 
