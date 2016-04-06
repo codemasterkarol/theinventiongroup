@@ -14,6 +14,7 @@
     $errors = [
         'name' => !empty($_SESSION['registration_errors']['name']) ? "<p class='error'>" . $_SESSION['registration_errors']['name'] . "</p>" : '',
         'email' => !empty($_SESSION['registration_errors']['email']) ? "<p class='error'>" . $_SESSION['registration_errors']['email'] . "</p>" : '',
+        'password' => !empty($_SESSION['registration_errors']['password']) ? "<p class='error'>" . $_SESSION['registration_errors']['password'] . "</p>" : '',
         'address' => !empty($_SESSION['registration_errors']['address']) ? "<p class='error'>" . $_SESSION['registration_errors']['address'] . "</p>" : '',
         'city' => !empty($_SESSION['registration_errors']['city']) ? "<p class='error'>" . $_SESSION['registration_errors']['city'] . "</p>" : '',
         'state' => !empty($_SESSION['registration_errors']['state']) ? "<p class='error'>" . $_SESSION['registration_errors']['state'] . "</p>" : '',
@@ -41,8 +42,9 @@
             <label for="email">Email (will double as your username)</label>
         </p><?= $errors['email']; ?>
         <p>
-            <input type="password" required name="password" placeholder="Password"><label for="email">Password</label>
-        </p>
+            <input type="password" required name="password" placeholder="Password">
+            <label for="password">Password</label>
+        </p><?= $errors['password']; ?>
         <p>
             <input type="text" required name="address" placeholder="1234 Main St." value="<?= $formValues['address'] ?>"  <?= !empty($_SESSION['registration_errors']['address']) ? 'class="error"': ''; ?>>
             <label for="address">Street Address</label>
