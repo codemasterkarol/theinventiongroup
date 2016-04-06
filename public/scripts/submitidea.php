@@ -129,7 +129,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         } elseif ($_FILES['image']['size'] > 3000000){
             $errors['image'] = "Sorry, your file exceeded our file size limit (3MB).";
         }
-        if(!empty($errors)) {
+        if(empty($errors)) {
             if (!is_dir($uploaddir)) {
                 if (!mkdir($uploaddir, 0777, true)) {
                     $_SESSION['message'] = "Sorry, we are unable to complete your submission at this time. Please try again later.";
@@ -150,6 +150,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $uploadfile = $uploaddir . basename($imageName);
             move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile);
             $image = "<img src='/assets/img/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
+        } else {
+            $_SESSION['submission_errors'] = $errors;
+            die(header("Location:/submit"));
         }
     }
 
