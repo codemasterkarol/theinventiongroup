@@ -127,8 +127,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             if (!mkdir($uploaddir, 0777, true)) {
                 die("Unable to create the {$uploaddir} directory");
             }
-        } else {
-            die("IT IS A DIRECTORY");
         }
         move_uploaded_file($_FILES['image']['tmp_name'],$uploadfile);
         $image = "<img src='/assets/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
