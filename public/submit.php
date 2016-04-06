@@ -21,7 +21,9 @@
     <h2>Submit an Idea</h2>
 
 
-    <?php if($_SESSION['loggedin']) {
+    <?php
+        var_dump($_SESSION['image']);
+        if($_SESSION['loggedin']) {
         if(!empty($_SESSION['message'])) { echo '<p class="message">' . $_SESSION['message'] . '</p>'; unset($_SESSION['message']); }
 
         if(!empty($_SESSION['submission_errors']['message'])) { echo '<p class="error">' . $_SESSION['submission_errors']['message'] . '</p>'; unset($_SESSION['submission_errors']['message']); }
@@ -38,7 +40,7 @@
             <?= $errors['inv_name']; ?>
             <textarea name="description" required placeholder="Edison offered to pay me good money to fix his problems with his DC motor, but I suspect he just wants me for my brain and won't actually pay me..."  value="<?= $formValues['description'] ?>" <?= !empty($_SESSION['submission_errors']['description']) ? 'class="error"': ''; ?>></textarea><label for="description">Description</label>
             <?= $errors['description']; ?>
-            <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+            <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
             <input type="file" class="custom-file-input" name="image" accept="image/*"><label for="image">Image</label>
             <?= $errors['image']; ?>
             <h4>Billing Information</h4>

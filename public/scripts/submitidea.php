@@ -114,14 +114,24 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
 
+    // Settings for file uploads
+    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/uploads/' . $_SESSION['id'] . '/';
+    $uploadfile = $uploaddir . basename($_FILES['image']['name']);
+
     /**
      * Filters the invention post
      * @todo make this actually do something.... lol
      */
-    if (!empty($_POST['image'])) {
-        $image = $_POST['image'];
-    } else {
-        $image = "";
+    if (!empty($_FILES['image'])) {
+        if(!is_dir($uploaddir)) {
+            if (!mkdir($uploaddir, 0777, true)) {
+                die("Unable to create the {$uploaddir} directory");
+            }
+        } else {
+            die("IT IS A DIRECTORY");
+        }
+        move_uploaded_file($_FILES['image']['tmp_name'],$uploadfile);
+        $image = "<img src='/assets/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
     }
 
 
@@ -145,7 +155,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if(submitIdea($db, $invention)){
             $_SESSION['message'] = "Your submission has been sent! We will get back to you soon!";
-            die(header('Location:/submit'));
+            die(header('Location:/members'));
         } else {
             $errors = "Sorry, there was an error completing your submission. Please try again later.";
             $_SESSION['submission_errors']['general'] = $errors;
