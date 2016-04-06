@@ -123,13 +123,23 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
      * @todo make this actually do something.... lol
      */
     if (!empty($_FILES['image'])) {
-        if(!is_dir($uploaddir)) {
-            if (!mkdir($uploaddir, 0777, true)) {
-                die("Unable to create the {$uploaddir} directory");
-            }
+
+        if($_FILES['image']['type'] !== "image/jpeg"){
+            $errors['image'] = "Sorry, only jpeg images are allowed.";
+        } elseif ($_FILES['image']['size'] > 3000000){
+            $errors['image'] = "Sorry, your file exceeded our file size limit (3MB).";
         }
-        move_uploaded_file($_FILES['image']['tmp_name'],$uploadfile);
-        $image = "<img src='/assets/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
+
+        if(!empty($errors)) {
+            if (!is_dir($uploaddir)) {
+                if (!mkdir($uploaddir, 0777, true)) {
+                    $_SESSION['message'] = "Sorry, we are unable to complete your submission at this time. Please try again later.";
+                    die(header("Location:/submit"));
+                }
+            }
+            move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile);
+            $image = "<img src='/assets/img/uploads/" . $_SESSION['id'] . '/' . $_FILES['image']['name'] . "'>";
+        }
     }
 
 

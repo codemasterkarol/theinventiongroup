@@ -22,7 +22,6 @@
 
 
     <?php
-        var_dump($_SESSION['image']);
         if($_SESSION['loggedin']) {
         if(!empty($_SESSION['message'])) { echo '<p class="message">' . $_SESSION['message'] . '</p>'; unset($_SESSION['message']); }
 
