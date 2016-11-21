@@ -11,11 +11,11 @@ http://invention.karolbrennan.com
 - Ability to view inventions
 
 ### Documentation
-[Proposal](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/Proposal.pdf)
-[Audience Analysis](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/AudienceAnalysis.pdf)
-[Requirements Definition](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/Requirements%20Definition.pdf)
-[Primary User Persona](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/primaryuserpersona.png)
-[Wireframe](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/wireframe.png)
+- [Proposal](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/Proposal.pdf)
+- [Audience Analysis](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/AudienceAnalysis.pdf)
+- [Requirements Definition](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/Requirements%20Definition.pdf)
+- [Primary User Persona](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/primaryuserpersona.png)
+- [Wireframe](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/wireframe.png)
 
 ## Technology
 This site is very stripped down and simple. It's just HTML, CSS, SVGs, basic PHP with a little bit of JavaScript. 
