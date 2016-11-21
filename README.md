@@ -4,6 +4,11 @@ This project was created for a mock client that evaluates inventor's ideas and h
 #### Current URL
 http://invention.karolbrennan.com
 
+### Features / Functionality
+- Registration / authentication system
+- Submission of inventions
+- Ability to view inventions
+
 ## Technology
 This site is very stripped down and simple. It's just HTML, CSS, SVGs, basic PHP with a little bit of JavaScript. 
 
@@ -15,6 +20,7 @@ This project is built on the back of my own custom [Vagrant Box](https://github.
 - CSS
 - PHP
 - JavaScript
+- MySQL
 
 ### Frameworks / Libraries Used
 - Foundation CSS
