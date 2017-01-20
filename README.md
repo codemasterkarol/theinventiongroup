@@ -3,6 +3,8 @@ This project was created for a mock client that evaluates inventor's ideas and h
 
 #### Current URL
 http://invention.karolbrennan.com
+
+### Screenshots
 ![Design showcase for Invention Group](https://github.com/codemasterkarol/theinventiongroup/blob/master/documentation/ResponsiveDesigns.png)
 
 ### Features / Functionality
